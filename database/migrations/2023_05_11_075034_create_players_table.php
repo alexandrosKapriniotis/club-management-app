@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text("description")->nullable();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Team::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -31,8 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('players');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::enableForeignKeyConstraints();
     }
 };

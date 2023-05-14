@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @role('admin')
     <div class="page-header d-flex mt-5">
         <div class="page-title col-8">
             <h4>Matches List</h4>
@@ -13,6 +14,7 @@
             </a>
         </div>
     </div>
+    @endrole
     <div class="table-responsive">
         <div class="table-wrapper">
             <table class="table table-striped table-hover">
@@ -31,26 +33,26 @@
                 @if (isset($matches) && count($matches) > 0)
                     @foreach ($matches as $match)
                         <tr>
-                            <td>
-                                {{ $match->date }}
-                            </td>
+                            <td>{{ Carbon\Carbon::create($match->date)->format('d-m-Y') }}</td>
                             <td>{{ $match->time }}</td>
                             <td>{{ $match->location }}</td>
                             <td>{{ $match->homeTeam->name }}</td>
                             <td>{{ $match->awayTeam->name }}</td>
                             <td>{{ $match->home_team_score }} - {{ $match->away_team_score }}</td>
                             <td>
-                                <div class="d-flex h-100">
+                                <div class="d-flex h-100 justify-content-center">
                                     <a href="{{ route('matches.show', $match->id) }}" class="show">
                                         <i class="bi bi-eye"></i>
                                     </a>
 
+                                    @role('admin')
                                     <a href="{{ route('matches.edit', $match->id) }}" class="edit" data-toggle="modal">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <a data-url="{{ route('matches.destroy', $match) }}" data-bs-target="#deleteRecordModal" data-bs-toggle="modal" class="delete delete-btn">
                                         <i class="bi bi-trash"></i>
                                     </a>
+                                    @endrole
                                 </div>
                             </td>
                         </tr>

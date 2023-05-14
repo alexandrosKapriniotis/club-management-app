@@ -24,7 +24,7 @@ class StoreTeamRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'logo' => 'required|image|max:10240',
+            'logo' => 'nullable|image|max:10240',
             'description' => 'nullable|string|max:255'
         ];
     }

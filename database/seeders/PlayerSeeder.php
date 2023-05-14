@@ -13,20 +13,6 @@ class PlayerSeeder extends Seeder
      */
     public function run(): void
     {
-        /* Creating a couple of players for each team */
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 1]);
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 1]);
-
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 2]);
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 2]);
-
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 3]);
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 3]);
-
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 4]);
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 4]);
-
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 5]);
-        Player::factory()->for(User::factory()->user()->create())->create(['team_id' => 5]);
+        Player::factory(50)->create();
     }
 }

@@ -20,7 +20,7 @@ class ClubPolicy
      */
     public function view(User $user, Club $club): bool
     {
-        return $user->id === $club->user_id;
+        return $user->club_id === $club->id;
     }
 
     /**
@@ -28,7 +28,7 @@ class ClubPolicy
      */
     public function update(User $user, Club $club): bool
     {
-        return $user->hasRole('admin') && ($user->id === $club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $club->id);
     }
 
     /**
@@ -36,7 +36,7 @@ class ClubPolicy
      */
     public function delete(User $user, Club $club): bool
     {
-        return $user->hasRole('admin') && ($user->id === $club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $club->id);
     }
 
     /**
@@ -44,7 +44,7 @@ class ClubPolicy
      */
     public function restore(User $user, Club $club): bool
     {
-        return $user->hasRole('admin') && ($user->id === $club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $club->id);
     }
 
     /**
@@ -52,6 +52,6 @@ class ClubPolicy
      */
     public function forceDelete(User $user, Club $club): bool
     {
-        return $user->hasRole('admin') && ($user->id === $club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $club->id);
     }
 }

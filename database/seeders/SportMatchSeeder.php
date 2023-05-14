@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\SportMatch;
 use Illuminate\Database\Seeder;
 
 class SportMatchSeeder extends Seeder
@@ -12,6 +12,6 @@ class SportMatchSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        SportMatch::factory(50)->create();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\SportMatch;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class SportMatchPolicy
 {
@@ -21,7 +22,7 @@ class SportMatchPolicy
      */
     public function view(User $user, SportMatch $sportMatch): bool
     {
-        return true;
+        return $sportMatch->club_id === $user->club_id;
     }
 
     /**
@@ -37,7 +38,7 @@ class SportMatchPolicy
      */
     public function update(User $user, SportMatch $sportMatch): bool
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin') && ($sportMatch->club_id === Auth::user()->club_id);
     }
 
     /**
@@ -45,7 +46,7 @@ class SportMatchPolicy
      */
     public function delete(User $user, SportMatch $sportMatch): bool
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin') && ($sportMatch->club_id === Auth::user()->club_id);
     }
 
     /**
@@ -53,7 +54,7 @@ class SportMatchPolicy
      */
     public function restore(User $user, SportMatch $sportMatch): bool
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin') && ($sportMatch->club_id === Auth::user()->club_id);
     }
 
     /**
@@ -61,6 +62,6 @@ class SportMatchPolicy
      */
     public function forceDelete(User $user, SportMatch $sportMatch): bool
     {
-        return $user->hasRole('admin');
+        return $user->hasRole('admin') && ($sportMatch->club_id === Auth::user()->club_id);
     }
 }

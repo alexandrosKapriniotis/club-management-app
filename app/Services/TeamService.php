@@ -56,9 +56,7 @@ class TeamService
 
         $query->orderBy('name',$sortDesc?'desc':'asc');
 
-        return $query->whereHas('club', function ($query) {
-            $query->where('user_id', Auth::user()->id);
-        })->latest()->paginate($perPage);
+        return $query->where('club_id', Auth::user()->club_id)->latest()->paginate($perPage);
     }
 
     /**
@@ -67,8 +65,11 @@ class TeamService
      */
     public function store(array $data): mixed
     {
-        $data['logo'] = $this->fileService->savePicture($data['logo'],Team::STORAGE_DIR,400);
-        $data['club_id'] = Auth::user()->club->id;
+        if (isset($data['logo'])) {
+            $data['logo'] = $this->fileService->savePicture($data['logo'],Team::STORAGE_DIR,400);
+        }
+
+        $data['club_id'] = Auth::user()->club_id;
 
         return Team::create($data);
     }

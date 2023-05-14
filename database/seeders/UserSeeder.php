@@ -14,17 +14,36 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@example.com'
+        User::factory()->admin()->create([
+            'name' => 'Club owner 1',
+            'email' => 'admin@example.com',
+            'club_id' => 1
         ]);
-        $user->assignRole($adminRole);
-
-        $user = User::factory()->create([
+        User::factory()->admin()->create([
+            'name' => 'Club owner 2',
+            'email' => 'admin2@example.com',
+            'club_id' => 2
+        ]);
+        User::factory()->admin()->create([
+            'name' => 'Club owner 3',
+            'email' => 'admin3@example.com',
+            'club_id' => 3
+        ]);
+        User::factory()->admin()->create([
+            'name' => 'Club owner 4',
+            'email' => 'admin4@example.com',
+            'club_id' => 4
+        ]);
+        User::factory()->admin()->create([
+            'name' => 'Club owner 5',
+            'email' => 'admin5@example.com',
+            'club_id' => 5
+        ]);
+        User::factory()->admin()->create([
             'name' => 'Alex',
             'email' => 'user@example.com'
         ]);
-        $user->assignRole($userRole);
+        User::factory(50)->user()->create();
     }
 
 }

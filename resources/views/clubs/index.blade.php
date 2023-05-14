@@ -26,17 +26,19 @@
                                 <td>{{ $club->name }}</td>
                                 <td>{{ $club->description }}</td>
                                 <td>
-                                    <div class="d-flex h-100">
+                                    <div class="d-flex h-100 justify-content-center">
                                         <a href="{{ route('clubs.show', $club->id) }}" class="show">
                                             <i class="bi bi-eye"></i>
                                         </a>
 
+                                        @role('admin')
                                         <a href="{{ route('clubs.edit', $club->id) }}" class="edit" data-toggle="modal">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a data-url="{{ route('clubs.destroy', $club) }}" data-bs-target="#deleteRecordModal" data-bs-toggle="modal" class="delete delete-btn">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
+{{--                                        <a data-url="{{ route('clubs.destroy', $club) }}" data-bs-target="#deleteRecordModal" data-bs-toggle="modal" class="delete delete-btn">--}}
+{{--                                            <i class="bi bi-trash"></i>--}}
+{{--                                        </a>--}}
+                                        @endrole
                                     </div>
                                 </td>
                             </tr>

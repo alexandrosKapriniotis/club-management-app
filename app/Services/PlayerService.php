@@ -62,7 +62,7 @@ class PlayerService
         }
 
         return $query->whereHas('team.club', function ($query) {
-                $query->where('user_id', Auth::user()->id);
+                $query->where('id', Auth::user()->id);
         })->latest()->paginate($perPage);
     }
 

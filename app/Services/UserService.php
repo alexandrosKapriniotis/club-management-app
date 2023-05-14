@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -63,6 +64,7 @@ class UserService
      */
     public function storePlayer(array $data): mixed
     {
+        $data['club_id']  = Auth::user()->club_id;
         $player = $this->store($data);
 
         $role = Role::findByName('user','web');

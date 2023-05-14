@@ -5,7 +5,7 @@
         <h3 class="fs-3 fw-semibold mt-2">Create match</h3>
     </div>
     <div class="mt-2 bg-white dark:bg-gray-800 rounded-lg shadow divide-y divide-gray-100 dark:divide-gray-700">
-        <form action="{{ route('matches.store') }}" method="POST" enctype="multipart/form-data" class="bg-white px-5 py-3 border-gray-100 border-2 rounded-lg">
+        <form action="{{ route('matches.store') }}" method="POST" class="bg-white px-5 py-3 border-gray-100 border-2 rounded-lg">
             @csrf
             <div class="row g-3 align-items-center">
                 <div class="col-md-4 col-sm-12 p-3">

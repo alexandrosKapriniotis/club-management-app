@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Player;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class PlayerPolicy
 {
@@ -21,7 +20,7 @@ class PlayerPolicy
      */
     public function view(User $user, Player $player): bool
     {
-        return $user->id === $player->team->club->user_id;
+        return $user->club_id === $player->team->club_id;
     }
 
     /**
@@ -37,7 +36,7 @@ class PlayerPolicy
      */
     public function update(User $user, Player $player): bool
     {
-        return $user->hasRole('admin') && ($user->id === $player->team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $player->team->club_id);
     }
 
     /**
@@ -45,7 +44,7 @@ class PlayerPolicy
      */
     public function delete(User $user, Player $player): bool
     {
-        return $user->hasRole('admin') && ($user->id === $player->team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $player->team->club_id);
     }
 
     /**
@@ -53,7 +52,7 @@ class PlayerPolicy
      */
     public function restore(User $user, Player $player): bool
     {
-        return $user->hasRole('admin') && ($user->id === $player->team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $player->team->club_id);
     }
 
     /**
@@ -61,6 +60,6 @@ class PlayerPolicy
      */
     public function forceDelete(User $user, Player $player): bool
     {
-        return $user->hasRole('admin') && ($user->id === $player->team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $player->team->club_id);
     }
 }

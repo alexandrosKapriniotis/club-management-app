@@ -12,10 +12,6 @@ class ClubSeeder extends Seeder
      */
     public function run(): void
     {
-        Club::factory()->create(['user_id' => 1]);
-        Club::factory()->create(['user_id' => 2]);
-        Club::factory()->create(['user_id' => 3]);
-        Club::factory()->create(['user_id' => 4]);
-        Club::factory()->create(['user_id' => 5]);
+        Club::factory(5)->create();
     }
 }

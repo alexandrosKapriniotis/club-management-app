@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mt-5">
-        <h3 class="fs-3 fw-semibold mt-2">Create club</h3>
+        <h3 class="fs-3 fw-semibold mt-2">Create team</h3>
     </div>
     <div class="mt-2 bg-white dark:bg-gray-800 rounded-lg shadow divide-y divide-gray-100 dark:divide-gray-700">
         <form action="{{ route('teams.store') }}" method="POST" enctype="multipart/form-data" class="bg-white px-5 py-3 border-gray-100 border-2 rounded-lg">

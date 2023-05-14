@@ -7,9 +7,9 @@
         <div class="nav-item text-nowrap">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <a class="nav-link px-3">
+                <button type="submit" class="bg-transparent border-0 nav-link px-3">
                     Sign out
-                </a>
+                </button>
             </form>
         </div>
     </div>

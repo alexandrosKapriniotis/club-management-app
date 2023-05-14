@@ -169,14 +169,7 @@ table.table tr th, table.table tr td {
     border-color: #e9e9e9;
     padding: 12px 15px;
     vertical-align: middle;
-}
-
-table.table tr th:first-child {
-    width: 60px;
-}
-
-table.table tr th:last-child {
-    width: 100px;
+    text-align: center;
 }
 
 table.table-striped tbody tr:nth-of-type(odd) {
@@ -394,6 +387,10 @@ table.table td:last-child i {
     font-size: 20px;
 }
 
+.page-item {
+    line-height: 1.2;
+}
+
 .table > thead {
     background: #FAFBFE;
     border-bottom: 1px solid #E9ECEF;
@@ -437,4 +434,73 @@ table.table td a.delete {
 
 .card .card-body {
     padding: 20px;
+}
+
+/* Events calendar */
+.future-event .fc-event-main {
+    background-color: #018749;
+}
+
+.past-event .fc-event-main {
+    background-color: #b7b7b7;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 4px;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.475rem;
+}
+
+/* Next match card */
+.next-match-card {
+    display: table-row;
+    width: 49%;
+    background-color: #fff;
+    color: #989898;
+    margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative;
+}
+
+.card-cont {
+    display: table-cell;
+    width: 65%;
+    font-size: 85%;
+    padding: 20px;
+}
+
+.card-cont h5 {
+    color: #3C3C3C;
+    font-size: 130%;
+}
+
+.next-match-date {
+    display: table-cell;
+    width: 35%;
+    position: relative;
+    text-align: center;
+    border-right: 2px dashed #dadde6;
+}
+
+.next-match-date time {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.next-match-container {
+    min-width: 300px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    margin-right: 10px;
+    align-self: flex-start;
 }

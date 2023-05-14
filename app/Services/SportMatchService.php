@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\SportMatch;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -88,8 +89,115 @@ class SportMatchService
 
         $query->orderBy('location',$sortDesc?'desc':'asc');
 
-        return $query->whereHas('club', function ($query) {
-            return $query->where('user_id', Auth::user()->id);
-        })->latest()->paginate($perPage);
+        return $query->where('club_id', Auth::user()->club_id)->latest()->paginate($perPage);
+    }
+
+    /**
+     * @param array $data
+     * @return Collection
+     */
+    public function list(array $data = []): Collection
+    {
+        $query = $this->searchQuery($data);
+
+        return $query->get();
+    }
+
+    /**
+     * @return array
+     */
+    public function calendarList(): array
+    {
+        $calendarMatches = [];
+        $matches = $this->list();
+
+        foreach ($matches as $match) {
+            $matchTime = Carbon::createFromFormat('H:i:s', $match->time);
+            $start     = $match->date->addHours($matchTime->hour)->addMinutes($matchTime->minute);
+            $end       = $start->copy()->addMinutes(90);
+
+            $calendarMatches[] = [
+                'title' => $match->homeTeam->name . ' - '.$match->awayTeam->name,
+                'start' => $start,
+                'end' => $end,
+            ];
+        }
+
+        return $calendarMatches;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function nextMatch(): mixed
+    {
+        return SportMatch::where('club_id', Auth::user()->club_id)
+            ->orderBy('date', 'DESC')
+            ->orderBy('time', 'DESC')->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function homeMatches(): mixed
+    {
+        return SportMatch::where('club_id', Auth::user()->club_id)->whereHas('homeTeam', function ($query) {
+            return $query->whereIn('id', Auth::user()->club->teams()->pluck('id'));
+        })->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function homeVictories(): mixed
+    {
+        $query = $this->searchQuery([]);
+
+        return $query->whereHas('homeTeam', function ($query) {
+            return $query->whereIn('id', Auth::user()->club->teams()->pluck('id'));
+        })->where('home_team_score', '>', 'away_team_score')->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function awayMatches(): mixed
+    {
+        return SportMatch::where('club_id', Auth::user()->club_id)->whereHas('awayTeam', function ($query) {
+            return $query->whereIn('id', Auth::user()->club->teams()->pluck('id'));
+        })->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function awayVictories(): mixed
+    {
+        $query = $this->searchQuery([]);
+
+        return $query->whereHas('awayTeam', function ($query) {
+            return $query->whereIn('id', Auth::user()->club->teams()->pluck('id'));
+        })->where('away_team_score', '>', 'home_team_score')->count();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function totalVictories(): mixed
+    {
+        return $this->homeVictories() + $this->awayVictories();
+    }
+
+    /**
+     * @return array
+     */
+    public function matchStatistics(): array
+    {
+        return [
+            'home_matches' => $this->homeMatches(),
+            'away_matches' => $this->awayMatches(),
+            'home_victories' => $this->homeVictories(),
+            'away_victories' => $this->awayVictories()
+        ];
     }
 }

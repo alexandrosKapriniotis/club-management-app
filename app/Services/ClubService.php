@@ -108,7 +108,9 @@ class ClubService
 
         $query->orderBy('name',$sortDesc?'desc':'asc');
 
-        return $query->where('user_id', Auth::user()->id)->latest()->paginate($perPage);
+        return $query->whereHas('user', function ($query) {
+            return $query->where('id', Auth::user()->id);
+        })->latest()->paginate($perPage);
     }
 
     /**

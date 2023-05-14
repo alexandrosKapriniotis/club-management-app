@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->text('description')->nullable();
             $table->foreignIdFor(Club::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -28,8 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('teams');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::enableForeignKeyConstraints();
     }
 };

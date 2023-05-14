@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @role('admin')
     <div class="page-header d-flex mt-5">
         <div class="page-title col-8">
             <h4>Teams List</h4>
@@ -13,6 +14,7 @@
             </a>
         </div>
     </div>
+    @endrole
     <div class="table-responsive">
         <div class="table-wrapper">
             <table class="table table-striped table-hover">
@@ -38,17 +40,19 @@
                                 <td>{{ $team->name }}</td>
                                 <td>{{ $team->description }}</td>
                                 <td>
-                                    <div class="d-flex h-100">
+                                    <div class="d-flex h-100 justify-content-center">
                                         <a href="{{ route('teams.show', $team->id) }}" class="show">
                                             <i class="bi bi-eye"></i>
                                         </a>
 
+                                        @role('admin')
                                         <a href="{{ route('teams.edit', $team->id) }}" class="edit" data-toggle="modal">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                         <a data-url="{{ route('teams.destroy', $team) }}" data-bs-target="#deleteRecordModal" class="delete" data-toggle="modal">
                                             <i class="bi bi-trash"></i>
                                         </a>
+                                        @endrole
                                     </div>
                                 </td>
                             </tr>

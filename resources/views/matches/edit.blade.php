@@ -5,7 +5,7 @@
         <h3 class="fs-3 fw-semibold mt-2">Edit match</h3>
     </div>
     <div class="mt-2 bg-white dark:bg-gray-800 rounded-lg shadow">
-        <form action="{{ route('matches.store') }}" method="POST" enctype="multipart/form-data" class="bg-white px-5 py-3">
+        <form action="{{ route('matches.update', $match->id) }}" method="POST" class="bg-white px-5 py-3">
             @csrf
             @method('PUT')
             @if ($errors->any())
@@ -16,7 +16,7 @@
                     <label for="date" class="form-label">Date</label>
                 </div>
                 <div class="col-md-8 col-sm-12 p-3">
-                    <input type="date" name="date" id="date" class="form-control" value="{{ $match->date }}">
+                    <input type="date" name="date" id="date" class="form-control" value="{{ Carbon\Carbon::create($match->date)->format('Y-m-d') }}">
                 </div>
             </div>
 

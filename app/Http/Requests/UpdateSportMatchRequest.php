@@ -26,8 +26,8 @@ class UpdateSportMatchRequest extends FormRequest
             'date' => 'date|required|after:now',
             'time' => 'required',
             'location' => 'required|string|max:255',
-            'home_team_id' => 'required|string|max:255',
-            'away_team_id' => 'required|string|max:255',
+            'home_team_id' => 'required|max:255',
+            'away_team_id' => 'required|max:255',
             'home_team_score'     => 'required',
             'away_team_score'     => 'required'
         ];

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('home_team_score')->default(0);
             $table->integer('away_team_score')->default(0);
             $table->foreignIdFor(Club::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

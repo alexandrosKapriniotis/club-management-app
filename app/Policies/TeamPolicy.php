@@ -21,7 +21,7 @@ class TeamPolicy
      */
     public function view(User $user, Team $team): bool
     {
-        return $user->id === $team->club->user_id;
+        return $user->club_id === $team->club->id;
     }
 
     /**
@@ -37,7 +37,7 @@ class TeamPolicy
      */
     public function update(User $user, Team $team): bool
     {
-        return $user->hasRole('admin') && ($user->id === $team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $team->club->id);
     }
 
     /**
@@ -45,7 +45,7 @@ class TeamPolicy
      */
     public function delete(User $user, Team $team): bool
     {
-        return $user->hasRole('admin') && ($user->id === $team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $team->club->id);
     }
 
     /**
@@ -53,7 +53,7 @@ class TeamPolicy
      */
     public function restore(User $user, Team $team): bool
     {
-        return $user->hasRole('admin') && ($user->id === $team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $team->club->id);
     }
 
     /**
@@ -61,6 +61,6 @@ class TeamPolicy
      */
     public function forceDelete(User $user, Team $team): bool
     {
-        return $user->hasRole('admin') && ($user->id === $team->club->user_id);
+        return $user->hasRole('admin') && ($user->club_id === $team->club->id);
     }
 }
