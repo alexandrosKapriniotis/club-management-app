@@ -49,7 +49,8 @@
                                         <a href="{{ route('teams.edit', $team->id) }}" class="edit" data-toggle="modal">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a data-url="{{ route('teams.destroy', $team) }}" data-bs-target="#deleteRecordModal" class="delete" data-toggle="modal">
+                                        
+                                        <a data-url="{{ route('teams.destroy', $team) }}" data-bs-target="#deleteRecordModal" class="delete delete-btn" data-toggle="modal">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                         @endrole
